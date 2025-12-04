@@ -43,9 +43,13 @@ Commands:
 
 Examples:
   $MP_CMD search "authentication"
+  $MP_CMD read user/preferences/index.md
   $MP_CMD add user preferences
-  $MP_CMD add project jerska/mind-palace
-  $MP_CMD link user/preferences user/jerska
+  $MP_CMD write user/preferences/index.md <<'EOF'
+    ... content ...
+  EOF
+  $MP_CMD remove sessions/old-session
+  $MP_CMD link user/preferences user/personality
   $MP_CMD check
 
 Environment:
