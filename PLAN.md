@@ -348,7 +348,7 @@ Sub-agent reads full content, returns summary. Main context stays lean.
 - [x] `mp read <path>` - read file (avoids Read tool permission prompts)
 - [x] `mp write <path>` - write stdin to file (avoids Edit tool permission prompts)
 - [x] `mp remove <path>` - remove file/directory (avoids rm permission prompts)
-- [x] `mp search <query>` - grep-based search
+- [x] `mp search <query>` - grep-based search (results grouped by memory)
 - [x] `mp list [type]` - list all memories
 - [x] `mp link <from> <to>` - create symlinks
 - [x] `mp unlink <from> <to>` - remove symlinks
