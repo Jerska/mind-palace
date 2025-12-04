@@ -8,6 +8,7 @@ IMPORTANT: Always use `mp` commands for all memory operations. Do NOT use Read, 
 
 ```bash
 ~/.mind-palace/mp search <query>    # Search memories
+~/.mind-palace/mp list [type]       # List all memories (or filter by type)
 ~/.mind-palace/mp read <path>       # Read file contents
 ~/.mind-palace/mp add <type> <name> # Create memory (types: user|project|self|session)
 ~/.mind-palace/mp write <path>      # Write stdin to file
