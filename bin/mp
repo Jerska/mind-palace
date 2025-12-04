@@ -32,6 +32,8 @@ Usage: $MP_CMD <command> [args]
 Commands:
   search <query>       Search memories
   add <type> <name>    Create new memory (type: user|project|self|session)
+  write <path>         Write stdin to file (path relative to mind-palace)
+  remove <path>        Remove file or directory
   link <from> <to>     Create symlink between memories
   unlink <from> <to>   Remove symlink between memories
   check                Find broken symlinks
@@ -50,8 +52,8 @@ EOF
 }
 
 # Main dispatch
-case "${1:-help}" in
-  search|add|link|unlink|check|help)
+case "${1:-}" in
+  search|add|write|remove|link|unlink|check|help)
     cmd="$1"
     shift
     if [[ "$cmd" == "help" ]]; then
