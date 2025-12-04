@@ -31,6 +31,7 @@ Usage: $MP_CMD <command> [args]
 
 Commands:
   search <query>       Search memories
+  read <path>          Read file contents
   add <type> <name>    Create new memory (type: user|project|self|session)
   write <path>         Write stdin to file (path relative to mind-palace)
   remove <path>        Remove file or directory
@@ -59,7 +60,7 @@ case "${1:-help}" in
     # See lib/hooks/session-start.sh
     exit 0
     ;;
-  search|add|write|remove|link|unlink|check|help)
+  search|read|add|write|remove|link|unlink|check|help)
     cmd="$1"
     shift
     if [[ "$cmd" == "help" ]]; then

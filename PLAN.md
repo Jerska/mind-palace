@@ -58,6 +58,7 @@ A memory system for Claude Code that addresses context window limitations throug
   lib/
     commands/
       search.sh
+      read.sh
       add.sh
       write.sh
       remove.sh
@@ -121,6 +122,7 @@ Brief summary (2-5 sentences). What is this, why does it matter.
 mp .                            # Whitelist trigger (used by session-start hook)
 mp search <query>               # Search memories (uses configured backend)
 mp search --backend=grep <q>    # Force specific backend
+mp read <path>                  # Read file contents
 mp add <type> <name>            # Create new memory folder + index.md
 mp write <path>                 # Write stdin to file (path relative to mind-palace)
 mp remove <path>                # Remove file or directory
@@ -341,6 +343,7 @@ Sub-agent reads full content, returns summary. Main context stays lean.
 - [x] Compatibility check (OS detection, required tools)
 - [x] CLI entry point with argument parsing
 - [x] `mp add <type> <name>` - create memory folder + template
+- [x] `mp read <path>` - read file (avoids Read tool permission prompts)
 - [x] `mp write <path>` - write stdin to file (avoids Edit tool permission prompts)
 - [x] `mp remove <path>` - remove file/directory (avoids rm permission prompts)
 - [x] `mp search <query>` - grep-based search
