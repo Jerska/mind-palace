@@ -39,5 +39,5 @@ cmd_write() {
   # Write stdin to file
   cat > "$target"
 
-  echo "Wrote: $target"
+  echo "Wrote: $path"
 }

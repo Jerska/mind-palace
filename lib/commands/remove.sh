@@ -31,12 +31,12 @@ cmd_remove() {
 
   # Check target exists
   if [[ ! -e "$target" ]]; then
-    echo "Error: $target does not exist" >&2
+    echo "Error: $path does not exist" >&2
     return 1
   fi
 
   # Remove (file or directory)
   rm -rf "$target"
 
-  echo "Removed: $target"
+  echo "Removed: $path"
 }

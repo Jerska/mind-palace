@@ -31,13 +31,13 @@ cmd_read() {
 
   # Check target exists
   if [[ ! -e "$target" ]]; then
-    echo "Error: $target does not exist" >&2
+    echo "Error: $path does not exist" >&2
     return 1
   fi
 
   # Check it's a file
   if [[ ! -f "$target" ]]; then
-    echo "Error: $target is not a file" >&2
+    echo "Error: $path is not a file" >&2
     return 1
   fi
 
