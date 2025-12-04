@@ -52,7 +52,13 @@ EOF
 }
 
 # Main dispatch
-case "${1:-}" in
+case "${1:-help}" in
+  .)
+    # Whitelist trigger: called by session-start hook with an argument
+    # so user can whitelist "mp:*" pattern (not just "mp" exactly).
+    # See lib/hooks/session-start.sh
+    exit 0
+    ;;
   search|add|write|remove|link|unlink|check|help)
     cmd="$1"
     shift

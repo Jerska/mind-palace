@@ -118,6 +118,7 @@ Brief summary (2-5 sentences). What is this, why does it matter.
 ## CLI Commands
 
 ```bash
+mp .                            # Whitelist trigger (used by session-start hook)
 mp search <query>               # Search memories (uses configured backend)
 mp search --backend=grep <q>    # Force specific backend
 mp add <type> <name>            # Create new memory folder + index.md
@@ -257,13 +258,29 @@ These are set by hooks and available in bash:
 }
 ```
 
-**lib/hooks/session-start.sh:**
+**lib/hooks/session-start.sh (current - whitelist trigger only):**
+```bash
+#!/bin/bash
+# Mind Palace session start hook
+# Runs at Claude Code session start to:
+# 1. Trigger permission prompt for mp:* if not yet whitelisted
+# 2. Set environment variables for the session (TODO)
+
+# Call mp with an arg to trigger whitelist prompt on first run
+# User can then whitelist mp:* to allow all subcommands
+~/.mind-palace/mp .
+```
+
+**lib/hooks/session-start.sh (future - full implementation):**
 ```bash
 #!/bin/bash
 # Receives JSON via stdin with session_id, source, transcript_path, etc.
 INPUT=$(cat)
 SESSION_ID=$(echo "$INPUT" | jq -r '.session_id')
 SOURCE=$(echo "$INPUT" | jq -r '.source')
+
+# Trigger whitelist prompt on first run
+~/.mind-palace/mp .
 
 # Make session ID available to subsequent bash commands
 echo "MIND_PALACE_SESSION_ID=$SESSION_ID" >> "$CLAUDE_ENV_FILE"
@@ -336,7 +353,8 @@ Sub-agent reads full content, returns summary. Main context stays lean.
 
 ### Phase 2: Claude Code Plugin
 - [ ] Plugin structure (plugin.json, marketplace.json)
-- [ ] Hooks (SessionStart for auto-update)
+- [x] SessionStart hook (whitelist trigger via `mp .`)
+- [ ] Hooks (SessionStart for env vars, PreCompact for session save)
 - [ ] Slash command wrapper (/mp-search)
 - [ ] `mp update` - git pull with staleness check
 - [ ] `mp config` - manage settings
