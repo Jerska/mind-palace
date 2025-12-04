@@ -1,0 +1,78 @@
+#!/bin/bash
+# Mind Palace CLI
+# Memory system for Claude Code
+
+set -e
+
+# Resolve script location (follow symlinks)
+SOURCE="${BASH_SOURCE[0]}"
+while [[ -L "$SOURCE" ]]; do
+  DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ "$SOURCE" != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+MP_ROOT="$(cd -P "$(dirname "$SOURCE")/.." && pwd)"
+
+# Default mind-palace data directory
+MIND_PALACE_DIR="${MIND_PALACE_DIR:-$HOME/.mind-palace}"
+
+# Command name for usage messages
+MP_CMD="$0"
+
+# Export for subcommands
+export MP_ROOT MIND_PALACE_DIR MP_CMD
+
+# Load command implementations
+COMMANDS_DIR="$MP_ROOT/lib/commands"
+
+usage() {
+  cat <<EOF
+Usage: $MP_CMD <command> [args]
+
+Commands:
+  search <query>       Search memories
+  add <type> <name>    Create new memory (type: user|project|self|session)
+  link <from> <to>     Create symlink between memories
+  unlink <from> <to>   Remove symlink between memories
+  check                Find broken symlinks
+  help                 Show this help
+
+Examples:
+  $MP_CMD search "authentication"
+  $MP_CMD add user preferences
+  $MP_CMD add project jerska/mind-palace
+  $MP_CMD link user/preferences user/jerska
+  $MP_CMD check
+
+Environment:
+  MIND_PALACE_DIR      Data directory (default: ~/.mind-palace)
+EOF
+}
+
+# Main dispatch
+case "${1:-help}" in
+  search|add|link|unlink|check|help)
+    cmd="$1"
+    shift
+    if [[ "$cmd" == "help" ]]; then
+      usage
+      exit 0
+    fi
+    if [[ -f "$COMMANDS_DIR/$cmd.sh" ]]; then
+      source "$COMMANDS_DIR/$cmd.sh"
+      "cmd_$cmd" "$@"
+    else
+      echo "Error: Command '$cmd' not implemented yet" >&2
+      exit 1
+    fi
+    ;;
+  -h|--help)
+    usage
+    exit 0
+    ;;
+  *)
+    echo "Error: Unknown command '$1'" >&2
+    echo "Run '$MP_CMD help' for usage." >&2
+    exit 1
+    ;;
+esac

@@ -20,8 +20,7 @@ A memory system for Claude Code that addresses context window limitations throug
   user/                           (user memories)
     preferences/
       index.md
-      links/
-        personality -> ../../personality/
+      personality -> ../personality/
     personality/
       index.md
     company/
@@ -60,7 +59,6 @@ A memory system for Claude Code that addresses context window limitations throug
     commands/
       search.sh
       add.sh
-      get.sh
       link.sh
       check.sh
       update.sh
@@ -84,7 +82,7 @@ A memory system for Claude Code that addresses context window limitations throug
 
 Each memory is a folder with:
 - `index.md` - Dense summary with frontmatter metadata
-- `links/` - Symlinks to related memories (optional)
+- Symlinks to related memories (siblings to index.md)
 - Additional files as needed (scripts, configs, examples)
 
 ### index.md Format
@@ -108,10 +106,10 @@ Brief summary (2-5 sentences). What is this, why does it matter.
 ## Pointers
 - File: `src/auth/index.ts`
 - Function: `validateToken` in `src/auth/jwt.ts:42`
-- See: [related-memory](links/related-memory)
+- See: [related-memory](related-memory)
 
 ## Related
-- [other-memory](links/other-memory)
+- [other-memory](other-memory)
 ```
 
 ## CLI Commands
@@ -120,7 +118,6 @@ Brief summary (2-5 sentences). What is this, why does it matter.
 mp search <query>               # Search memories (uses configured backend)
 mp search --backend=grep <q>    # Force specific backend
 mp add <type> <name>            # Create new memory folder + index.md
-mp get <path>                   # Output memory content
 mp link <from> <to>             # Create symlink between memories
 mp unlink <from> <to>           # Remove symlink
 mp check                        # Find broken symlinks
@@ -318,17 +315,16 @@ Sub-agent reads full content, returns summary. Main context stays lean.
 ## Implementation Phases
 
 ### Phase 1: Core Foundation
-- [ ] Project structure (bin/, lib/, skills/, hooks/)
-- [ ] Compatibility check (OS detection, required tools)
-- [ ] CLI entry point with argument parsing
-- [ ] `mp add <type> <name>` - create memory folder + template
-- [ ] `mp get <path>` - output memory content
-- [ ] `mp search <query>` - grep-based search
-- [ ] `mp link <from> <to>` - create symlinks
-- [ ] `mp check` - find broken symlinks
-- [ ] `mp help` - usage info
-- [ ] Basic skill file
-- [ ] Installation script (runs compat check, creates ~/.mind-palace, symlink)
+- [x] Project structure (bin/, lib/, skills/, hooks/)
+- [x] Compatibility check (OS detection, required tools)
+- [x] CLI entry point with argument parsing
+- [x] `mp add <type> <name>` - create memory folder + template
+- [x] `mp search <query>` - grep-based search
+- [x] `mp link <from> <to>` - create symlinks
+- [x] `mp check` - find broken symlinks
+- [x] `mp help` - usage info
+- [x] Basic skill file
+- [x] Installation script (runs compat check, creates ~/.mind-palace, symlink)
 
 ### Phase 2: Claude Code Plugin
 - [ ] Plugin structure (plugin.json, marketplace.json)
