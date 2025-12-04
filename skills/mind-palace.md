@@ -2,6 +2,24 @@
 
 You have access to a memory system at ~/.mind-palace.
 
+IMPORTANT: Always use `mp` commands for all memory operations. Do NOT use Read, Edit, Write, or rm tools on ~/.mind-palace files - use the mp CLI instead.
+
+## CLI Reference
+
+```bash
+~/.mind-palace/mp search <query>    # Search memories
+~/.mind-palace/mp read <path>       # Read file contents
+~/.mind-palace/mp add <type> <name> # Create memory (types: user|project|self|session)
+~/.mind-palace/mp write <path>      # Write stdin to file
+~/.mind-palace/mp remove <path>     # Remove file or directory
+~/.mind-palace/mp link <from> <to>  # Create symlink between memories
+~/.mind-palace/mp unlink <from> <to># Remove symlink
+~/.mind-palace/mp check             # Find broken symlinks
+~/.mind-palace/mp help              # Show usage
+```
+
+All paths are relative to ~/.mind-palace (e.g., `mp read user/preferences/index.md`).
+
 ## When to Query Memories
 
 - At session start: check for relevant project/user memories
@@ -11,7 +29,6 @@ You have access to a memory system at ~/.mind-palace.
 
 ## How to Search
 
-Use bash:
 ```bash
 ~/.mind-palace/mp search "query"
 ```
@@ -23,9 +40,31 @@ Results show memory paths and matching snippets.
 Spawn a sub-agent to keep your context lean:
 
 ```
-Task: "Read memory at ~/.mind-palace/projects/X/index.md.
+Task: "Read memory using: ~/.mind-palace/mp read projects/X/index.md
       User wants to know: <specific question>.
-      Return ONLY relevant info, under 100 words, except if you consider it absolutely necessary to go beyond this limit."
+      Return ONLY relevant info, under 100 words, except if absolutely necessary.
+      IMPORTANT: Use mp read, NOT the Read tool."
+```
+
+## How to Create/Update Memories
+
+Create new memory:
+```bash
+~/.mind-palace/mp add <type> <name>
+# Then read the generated template:
+~/.mind-palace/mp read <type>/<name>/index.md
+```
+
+Write content (use heredoc):
+```bash
+~/.mind-palace/mp write <path> <<'EOF'
+content here
+EOF
+```
+
+Remove memory:
+```bash
+~/.mind-palace/mp remove <path>
 ```
 
 ## When to Create/Update Memories
@@ -33,25 +72,6 @@ Task: "Read memory at ~/.mind-palace/projects/X/index.md.
 - After significant code exploration: update project memories
 - When learning user preferences: update user memories
 - When asked to remember something: create appropriate memory
-
-To create:
-```bash
-~/.mind-palace/mp add <type> <name>
-# Types: user, project, self, session
-```
-
-Then edit the generated index.md.
-
-## CLI Reference
-
-```bash
-mp search <query>       # Search memories
-mp add <type> <name>    # Create memory (types: user|project|self|session)
-mp link <from> <to>     # Create symlink between memories
-mp unlink <from> <to>   # Remove symlink
-mp check                # Find broken symlinks
-mp help                 # Show usage
-```
 
 ## Memory Structure
 
