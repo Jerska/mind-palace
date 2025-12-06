@@ -42,6 +42,7 @@ Commands:
   check                Find broken symlinks
   update               Update mind-palace from git
   session <cmd>        Session memory (check|list|clean)
+  reference            Print CLI reference for sub-agents
   help                 Show this help
 
 Examples:
@@ -69,7 +70,7 @@ case "${1:-help}" in
     # See lib/hooks/session-start.sh
     exit 0
     ;;
-  search|list|read|add|write|remove|rename|link|unlink|check|update|session|help)
+  search|list|read|add|write|remove|rename|link|unlink|check|update|session|reference|help)
     cmd="$1"
     shift
     if [[ "$cmd" == "help" ]]; then

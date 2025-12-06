@@ -7,33 +7,41 @@ description: Persistent memory system for Claude. Use when you need to read, wri
 
 Use this skill to interact with your persistent memory system.
 
-## Search (run directly)
+## Direct Commands (search/list only)
 
 ```bash
 ~/.mind-palace/mp search "query"
 ~/.mind-palace/mp list [type]
 ```
 
-## Read Memory
+## Read/Write Memory
 
-Spawn a sub-agent to keep your context lean:
+**NEVER call `mp read` or `mp write` directly.** Always spawn a sub-agent to keep context lean.
+
+### Read
 
 ```
-Task: "Read mind-palace memory at <path>.
-      First read ~/.mind-palace/skills/mind-palace/cli-reference.md for CLI usage.
+Task: "Run ~/.mind-palace/mp reference to see CLI usage.
+      ONLY use mp commands via Bash. Do NOT use Read, Glob, Grep, or any other tools.
+
+      Operations: <list operations: search, list, read paths>
       User wants to know: <specific question>.
+
       Return ONLY relevant info, under 100 words."
 ```
 
-## Write Memory
+Example: "Operations: search 'auth', read user, read projects/myapp"
 
-Spawn a sub-agent:
+### Write
 
 ```
-Task: "Write to mind-palace at <path>.
-      First read ~/.mind-palace/skills/mind-palace/cli-reference.md for CLI usage.
-      Content to write:
+Task: "Run ~/.mind-palace/mp reference to see CLI usage.
+      ONLY use mp commands via Bash. Do NOT use Read, Glob, Grep, or any other tools.
+
+      Write to <path>:
       <content>
+
+      After writing, use mp search to find related memories and mp link if appropriate.
       Confirm when done."
 ```
 
