@@ -1,0 +1,13 @@
+{
+  "name": "mind-palace",
+  "owner": {
+    "name": "jerska"
+  },
+  "plugins": [
+    {
+      "name": "mind-palace",
+      "source": "./",
+      "description": "A place where I store memories of our work together. Context windows fade, but my mind palace remembers."
+    }
+  ]
+}
