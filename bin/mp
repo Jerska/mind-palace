@@ -60,9 +60,10 @@ EOF
 
 # Main dispatch
 case "${1:-help}" in
-  .)
-    # Whitelist trigger: called by session-start hook with an argument
-    # so user can whitelist "mp:*" pattern (not just "mp" exactly).
+  --allow)
+    # No-op for Claude Code permission prompt.
+    # Flags like --allow trigger a "mp:*" whitelist pattern,
+    # whereas positional args like "." trigger "mp .:*".
     # See lib/hooks/session-start.sh
     exit 0
     ;;
