@@ -12,10 +12,11 @@ IMPORTANT: Use ONLY mp commands via Bash. Do NOT use Read, Edit, Write, Glob, or
 ~/.mind-palace/mp search <query>      # Search memories
 ~/.mind-palace/mp list                # List memories (excludes sessions)
 ~/.mind-palace/mp list [type]         # List specific type (user|project|self|session)
-~/.mind-palace/mp read <path>         # Read file
+~/.mind-palace/mp read <path>         # Read file (reads index.md if given a folder)
 ~/.mind-palace/mp write <path> <text> # Write file
 ~/.mind-palace/mp add <type> <name>   # Create memory (user|project|self|session)
 ~/.mind-palace/mp remove <path>       # Remove file/directory
+~/.mind-palace/mp link <from> <to>    # Create symlink between memories
 
 All paths are relative to ~/.mind-palace (e.g., `mp read user/index.md`).
 
