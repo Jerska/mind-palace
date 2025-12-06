@@ -50,3 +50,57 @@ fi
 
 # Auto-update check (non-blocking)
 ~/.mind-palace/mp update --quiet 2>/dev/null || true
+
+# Build context for Claude
+context="## Mind Palace
+
+You have persistent memory across sessions. Use the mind-palace skill when you need to read or write memories.
+
+### Memory Types
+- **user/** - User preferences, workflows, communication style
+- **self/** - Your learnings, effective patterns, limitations
+- **projects/** - Project knowledge, architecture, conventions
+- **sessions/** - Working scratchpad (auto-cleaned after ~7 days)
+
+### When to Query
+- Before deep dives: check if prior exploration exists
+- When context feels incomplete: search for related memories
+- After compaction: read session files if MIND_PALACE_RESTORED=1
+
+### When to Update
+- **user/**: Learning preferences, told \"remember that I...\"
+- **self/**: Discovering effective patterns, what works/doesn't
+- **projects/**: Key files, architecture, conventions learned
+- **sessions/**: Quick notes, work-in-progress
+
+### Core Memories (provided directly - no need to read these)"
+
+# Append user memory if exists
+if [[ -f "$HOME/.mind-palace/user/index.md" ]]; then
+  user_content=$(~/.mind-palace/mp read user/index.md)
+  context="$context
+
+#### user/index.md
+\`\`\`
+$user_content
+\`\`\`"
+fi
+
+# Append self memory if exists
+if [[ -f "$HOME/.mind-palace/self/index.md" ]]; then
+  self_content=$(~/.mind-palace/mp read self/index.md)
+  context="$context
+
+#### self/index.md
+\`\`\`
+$self_content
+\`\`\`"
+fi
+
+# Output as JSON for Claude Code to inject into context
+jq -n --arg ctx "$context" '{
+  "hookSpecificOutput": {
+    "hookEventName": "SessionStart",
+    "additionalContext": $ctx
+  }
+}'
