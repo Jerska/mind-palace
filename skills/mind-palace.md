@@ -118,10 +118,15 @@ Remove memory:
 - After significant code exploration
 
 ### sessions/
-- Write as you work, not just at compaction
-- Current work state, in-progress decisions
+- Quick notes, work-in-progress
 - Context that won't matter after session ends
-- Multiple topic files for different branches of work
+- Will be cleaned up after ~7 days
+
+### projects/ (subfiles)
+- Detailed analysis worth keeping permanently
+- Write directly here, don't "graduate" from session later
+- Example: `projects/X/feature-design.md` for deep dive documentation
+- Update index.md to point to subfiles
 
 ## Memory in Task Planning
 
