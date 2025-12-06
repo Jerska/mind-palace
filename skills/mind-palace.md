@@ -69,16 +69,40 @@ Remove memory:
 ~/.mind-palace/mp remove <path>
 ```
 
-## When to Create/Update Memories
+## When to Update Memories
 
-- After significant code exploration: update project memories
-- When learning user preferences: update user memories
-- When asked to remember something: create appropriate memory
+### user/
+- Learning user preferences or workflows
+- Discovering how the user likes to communicate
+- When explicitly told "remember that I..."
+
+### self/
+- Discovering Claude's strengths or limitations
+- Learning effective patterns for specific tasks
+- Meta-observations about what works/doesn't
+
+### projects/
+- Key files, commands, or conventions change
+- Finding important project files - add to Pointers
+- Learning project structure or architecture
+- After significant code exploration
+
+### sessions/
+- Significant decisions made during a session
+- Context needed for follow-up sessions
+- Work in progress that may resume later
+
+## Memory in Task Planning
+
+When planning tasks with TODOs, include memory operations:
+- **Start**: "Check memories for <relevant context>" (user prefs, project architecture, prior sessions)
+- **End**: "Update memories with <learnings>" (new discoveries, decisions, conventions)
 
 ## Memory Structure
 
 Each memory is a folder with:
-- `index.md` - Dense summary with frontmatter metadata
-- Symlinks to related memories (siblings to index.md)
+- `index.md` - Small overview with pointers, kept concise
+- Sub-files for detailed topics (e.g., `user/bash.md`, `user/communication.md`)
+- Symlinks to related memories
 
-Keep memories concise: summaries with pointers to files/functions, not dumps.
+Keep `index.md` as a summary with pointers to sub-files. Create sub-memories for specific topics rather than growing index.md.
