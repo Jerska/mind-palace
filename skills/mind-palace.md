@@ -17,17 +17,47 @@ IMPORTANT: Always use `mp` commands for all memory operations. Do NOT use Read, 
 ~/.mind-palace/mp link <from> <to>  # Create symlink between memories
 ~/.mind-palace/mp unlink <from> <to># Remove symlink
 ~/.mind-palace/mp check             # Find broken symlinks
+~/.mind-palace/mp session check     # Check if session exists
+~/.mind-palace/mp session list      # List saved sessions
+~/.mind-palace/mp session clean     # Remove old sessions (default: >7 days)
 ~/.mind-palace/mp help              # Show usage
 ```
 
 All paths are relative to ~/.mind-palace (e.g., `mp read user/preferences/index.md`).
+
+## Environment Variables
+
+Set automatically by SessionStart hook:
+- `MIND_PALACE_SESSION_ID` - Claude Code's session identifier
+- `MIND_PALACE_SESSION_NAME` - Session folder name (e.g., `2025-12-06_08-00_abc123`)
+- `MIND_PALACE_RESTORED` - Set to "1" if resuming after context compaction
+
+## Sessions
+
+Sessions are created automatically at startup. Use `$MIND_PALACE_SESSION_NAME` to write to the current session:
+
+```bash
+~/.mind-palace/mp write sessions/$MIND_PALACE_SESSION_NAME/topic.md <<'EOF'
+content here
+EOF
+```
+
+Sessions are a **working scratchpad** for transient context:
+- Write summaries as you work, not just at the end
+- Multiple topic files per session (e.g., `phase-2.md`, `debugging.md`)
+- Temporary/in-progress information goes here
+
+**Permanent learnings** should go directly to the appropriate memory:
+- User preferences → `user/`
+- Project knowledge → `projects/`
+- Claude learnings → `self/`
 
 ## When to Query Memories
 
 - At session start: check for relevant project/user memories
 - Before deep dives: see if prior exploration exists
 - When context feels incomplete: search for related memories
-- When user references past conversations: check session memories
+- After compaction: if `MIND_PALACE_RESTORED=1`, read session files for context
 
 ## How to Search
 
@@ -88,9 +118,10 @@ Remove memory:
 - After significant code exploration
 
 ### sessions/
-- Significant decisions made during a session
-- Context needed for follow-up sessions
-- Work in progress that may resume later
+- Write as you work, not just at compaction
+- Current work state, in-progress decisions
+- Context that won't matter after session ends
+- Multiple topic files for different branches of work
 
 ## Memory in Task Planning
 

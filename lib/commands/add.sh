@@ -31,12 +31,26 @@ cmd_add() {
       ;;
   esac
 
-  # Build path
-  local memory_dir="$MIND_PALACE_DIR/$type_dir/$name"
+  # Build path (sessions get date-time prefix for sorting)
+  local folder_name="$name"
+  if [[ "$type" == "session" ]]; then
+    local datetime
+    datetime=$(date "+%Y-%m-%d_%H-%M")
+    folder_name="${datetime}_${name}"
+  fi
+
+  local memory_dir="$MIND_PALACE_DIR/$type_dir/$folder_name"
   local index_file="$memory_dir/index.md"
 
-  # Check if already exists
-  if [[ -d "$memory_dir" ]]; then
+  # Check if already exists (for sessions, check by suffix)
+  if [[ "$type" == "session" ]]; then
+    local existing
+    existing=$(find "$MIND_PALACE_DIR/$type_dir" -maxdepth 1 -type d -name "*_${name}" 2>/dev/null | head -1)
+    if [[ -n "$existing" ]]; then
+      echo "Error: Session '$name' already exists at $existing" >&2
+      return 1
+    fi
+  elif [[ -d "$memory_dir" ]]; then
     echo "Error: Memory already exists at $memory_dir" >&2
     return 1
   fi

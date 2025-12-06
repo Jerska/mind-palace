@@ -2,7 +2,7 @@
 # Mind Palace session start hook
 # Runs at Claude Code session start to:
 # 1. Trigger permission prompt for mp:* if not yet whitelisted
-# 2. Set environment variables for the session
+# 2. Create session and set environment variables
 
 # Receives JSON via stdin with session_id, source, transcript_path, etc.
 INPUT=$(cat)
@@ -27,6 +27,24 @@ if [[ -n "$SESSION_ID" && -n "$CLAUDE_ENV_FILE" ]]; then
   # Set restored flag if resuming after compaction
   if [[ "$SOURCE" == "compact" ]]; then
     echo "MIND_PALACE_RESTORED=1" >> "$CLAUDE_ENV_FILE"
+  fi
+
+  # Create or find session
+  sessions_dir="$HOME/.mind-palace/sessions"
+  existing=$(find "$sessions_dir" -maxdepth 1 -type d -name "*_${SESSION_ID}" 2>/dev/null | head -1)
+
+  if [[ -n "$existing" ]]; then
+    # Session exists (resume/compact/clear)
+    session_name=$(basename "$existing")
+  elif [[ "$SOURCE" == "startup" ]]; then
+    # New session - create it
+    ~/.mind-palace/mp add session "$SESSION_ID" >/dev/null 2>&1
+    existing=$(find "$sessions_dir" -maxdepth 1 -type d -name "*_${SESSION_ID}" 2>/dev/null | head -1)
+    session_name=$(basename "$existing")
+  fi
+
+  if [[ -n "$session_name" ]]; then
+    echo "MIND_PALACE_SESSION_NAME=$session_name" >> "$CLAUDE_ENV_FILE"
   fi
 fi
 

@@ -41,6 +41,7 @@ Commands:
   unlink <from> <to>   Remove symlink between memories
   check                Find broken symlinks
   update               Update mind-palace from git
+  session <cmd>        Session memory (check|list|clean)
   help                 Show this help
 
 Examples:
@@ -68,7 +69,7 @@ case "${1:-help}" in
     # See lib/hooks/session-start.sh
     exit 0
     ;;
-  search|list|read|add|write|remove|rename|link|unlink|check|update|help)
+  search|list|read|add|write|remove|rename|link|unlink|check|update|session|help)
     cmd="$1"
     shift
     if [[ "$cmd" == "help" ]]; then
