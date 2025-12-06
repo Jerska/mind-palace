@@ -1,6 +1,10 @@
 ---
 name: mind-palace
-description: Persistent memory system for Claude. Use when you need to read, write, or search memories about the user, projects, or yourself.
+description: |
+      Persistent memory system.
+      Use whenever:
+      1. additional information seems needed - you may already have memories stored about it
+      2. you become aware of new information, either provided by the user or discovered on your own (e.g. during an analysis or planning phase)
 ---
 
 # Mind Palace Skill
@@ -10,7 +14,7 @@ Use this skill to interact with your persistent memory system.
 ## Model Selection
 
 - **haiku**: Simple reads, single file lookups
-- **sonnet/opus**: Writes, multi-file operations, aggregation
+- **sonnet/opus**: Writes, multi-file operations (including search), aggregation
 
 ## Direct Commands (search/list only)
 
