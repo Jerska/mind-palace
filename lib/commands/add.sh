@@ -17,9 +17,13 @@ cmd_add() {
     return 1
   fi
 
-  # Validate type
+  # Validate and pluralize type
+  local type_dir
   case "$type" in
-    user|project|self|session) ;;
+    user) type_dir="user" ;;
+    self) type_dir="self" ;;
+    project|projects) type_dir="projects"; type="project" ;;
+    session|sessions) type_dir="sessions"; type="session" ;;
     *)
       echo "Error: Invalid type '$type'" >&2
       echo "Valid types: user, project, self, session" >&2
@@ -28,7 +32,7 @@ cmd_add() {
   esac
 
   # Build path
-  local memory_dir="$MIND_PALACE_DIR/$type/$name"
+  local memory_dir="$MIND_PALACE_DIR/$type_dir/$name"
   local index_file="$memory_dir/index.md"
 
   # Check if already exists
@@ -76,5 +80,5 @@ EOF
   echo "Created: $index_file"
   echo ""
   echo "Edit the file to add content, then optionally:"
-  echo "  $MP_CMD link $type/$name <other-memory>"
+  echo "  $MP_CMD link $type_dir/$name <other-memory>"
 }
