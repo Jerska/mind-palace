@@ -7,6 +7,11 @@ description: Persistent memory system for Claude. Use when you need to read, wri
 
 Use this skill to interact with your persistent memory system.
 
+## Model Selection
+
+- **haiku**: Simple reads, single file lookups
+- **sonnet/opus**: Writes, multi-file operations, aggregation
+
 ## Direct Commands (search/list only)
 
 ```bash
@@ -23,7 +28,7 @@ Use this skill to interact with your persistent memory system.
 
 ```
 Task: "Run ~/.mind-palace/mp reference to see CLI usage.
-      ONLY use mp commands via Bash. Do NOT use Read, Glob, Grep, or any other tools.
+      ONLY use mp commands via Bash. Do NOT use Read, Write, Edit, Glob, or Grep tools.
 
       Operations: <list operations: search, list, read paths>
       User wants to know: <specific question>.
@@ -37,7 +42,7 @@ Example: "Operations: search 'auth', read user, read projects/myapp"
 
 ```
 Task: "Run ~/.mind-palace/mp reference to see CLI usage.
-      ONLY use mp commands via Bash. Do NOT use Read, Glob, Grep, or any other tools.
+      ONLY use mp commands via Bash. Do NOT use Read, Write, Edit, Glob, or Grep tools.
 
       Write to <path>:
       <content>
