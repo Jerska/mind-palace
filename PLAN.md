@@ -63,6 +63,7 @@ A memory system for Claude Code that addresses context window limitations throug
       add.sh
       write.sh
       remove.sh
+      rename.sh
       link.sh
       unlink.sh
       check.sh
@@ -128,6 +129,7 @@ mp read <path>                  # Read file contents
 mp add <type> <name>            # Create new memory folder + index.md
 mp write <path>                 # Write stdin to file (path relative to mind-palace)
 mp remove <path>                # Remove file or directory
+mp rename <from> <to>           # Rename/move a memory (updates symlinks automatically)
 mp link <from> <to>             # Create symlink between memories
 mp unlink <from> <to>           # Remove symlink
 mp check                        # Find broken symlinks
@@ -348,6 +350,7 @@ Sub-agent reads full content, returns summary. Main context stays lean.
 - [x] `mp read <path>` - read file (avoids Read tool permission prompts)
 - [x] `mp write <path>` - write stdin to file (avoids Edit tool permission prompts)
 - [x] `mp remove <path>` - remove file/directory (avoids rm permission prompts)
+- [x] `mp rename <from> <to>` - rename/move memory (updates symlinks automatically)
 - [x] `mp search <query>` - grep-based search (results grouped by memory)
 - [x] `mp list [type]` - list all memories
 - [x] `mp link <from> <to>` - create symlinks

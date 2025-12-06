@@ -13,6 +13,7 @@ IMPORTANT: Always use `mp` commands for all memory operations. Do NOT use Read, 
 ~/.mind-palace/mp add <type> <name> # Create memory (types: user|project|self|session)
 ~/.mind-palace/mp write <path>      # Write stdin to file
 ~/.mind-palace/mp remove <path>     # Remove file or directory
+~/.mind-palace/mp rename <from> <to># Rename/move memory (updates symlinks)
 ~/.mind-palace/mp link <from> <to>  # Create symlink between memories
 ~/.mind-palace/mp unlink <from> <to># Remove symlink
 ~/.mind-palace/mp check             # Find broken symlinks

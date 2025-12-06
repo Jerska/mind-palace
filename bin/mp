@@ -36,6 +36,7 @@ Commands:
   add <type> <name>    Create new memory (type: user|project|self|session)
   write <path>         Write stdin to file (path relative to mind-palace)
   remove <path>        Remove file or directory
+  rename <from> <to>   Rename/move a memory (updates symlinks)
   link <from> <to>     Create symlink between memories
   unlink <from> <to>   Remove symlink between memories
   check                Find broken symlinks
@@ -65,7 +66,7 @@ case "${1:-help}" in
     # See lib/hooks/session-start.sh
     exit 0
     ;;
-  search|list|read|add|write|remove|link|unlink|check|help)
+  search|list|read|add|write|remove|rename|link|unlink|check|help)
     cmd="$1"
     shift
     if [[ "$cmd" == "help" ]]; then
