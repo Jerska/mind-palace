@@ -34,7 +34,7 @@ Commands:
   list [type]          List all memories (or filter by type)
   read <path>          Read file contents
   add <type> <name>    Create new memory (type: user|project|self|session)
-  write <path>         Write stdin to file (path relative to mind-palace)
+  write <path> <text>  Write text to file
   remove <path>        Remove file or directory
   rename <from> <to>   Rename/move a memory (updates symlinks)
   link <from> <to>     Create symlink between memories

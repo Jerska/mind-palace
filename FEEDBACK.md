@@ -19,14 +19,6 @@ To add to a memory, I must:
 
 An `mp append` would save context and reduce errors.
 
-### mp write heredoc is verbose
-```bash
-mp write path <<'EOF'
-content
-EOF
-```
-Fine, but easy to forget the `'EOF'` quotes (which matter for escaping).
-
 ### mp add then mp read dance
 After `mp add`, I need to `mp read` to see the template before I can write meaningful content. Could `mp add` just output the template directly? Or have a `--edit` flag that outputs the template for immediate modification?
 
@@ -40,8 +32,3 @@ After `mp add`, I need to `mp read` to see the template before I can write meani
 1. `mp append <path>` - append stdin to file
 2. `mp add --stdout` - output template to stdout instead of creating file (so I can pipe/modify)
 
-## Notes
-
-- Pipe chains bypass permission prompts entirely - only the first command is checked
-- This is useful (`mp read ... | head -N`) but potentially a security concern
-- Discovered via testing: `echo "test" | rm` ran without prompt

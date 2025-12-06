@@ -37,9 +37,7 @@ Set automatically by SessionStart hook:
 Sessions are created automatically at startup. Use `$MIND_PALACE_SESSION_NAME` to write to the current session:
 
 ```bash
-~/.mind-palace/mp write sessions/$MIND_PALACE_SESSION_NAME/topic.md <<'EOF'
-content here
-EOF
+~/.mind-palace/mp write sessions/$MIND_PALACE_SESSION_NAME/topic.md 'content here'
 ```
 
 Sessions are a **working scratchpad** for transient context:
@@ -87,12 +85,12 @@ Create new memory:
 ~/.mind-palace/mp read <type>/<name>/index.md
 ```
 
-Write content (use heredoc):
+Write content (pass as argument to avoid heredoc permission issues):
 ```bash
-~/.mind-palace/mp write <path> <<'EOF'
-content here
-EOF
+~/.mind-palace/mp write <path> 'content here
+multiline works'
 ```
+Note: to include a single quote, end the string, add `\'`, then start a new string: `'it'\''s working'`
 
 Remove memory:
 ```bash
