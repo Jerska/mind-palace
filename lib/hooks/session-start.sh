@@ -63,15 +63,15 @@ You have persistent memory across sessions. Use the mind-palace skill when you n
 - **sessions/** - Working scratchpad (auto-cleaned after ~7 days)
 
 ### When to Query
-- Before deep dives: check if prior exploration exists
-- When context feels incomplete: search for related memories
+- When user references prior conversations: plans, decisions, prior work
+- Before searching the codebase: check if prior exploration exists
 - After compaction: read session files if MIND_PALACE_RESTORED=1
 
 ### When to Update
 - **user/**: Learning preferences, told \"remember that I...\"
 - **self/**: Discovering effective patterns, what works/doesn't
 - **projects/**: Key files, architecture, conventions learned
-- **sessions/**: Quick notes, work-in-progress
+- **sessions/**: Write after completing tasks or making progress
 
 ### Core Memories (provided directly - no need to read these)"
 
