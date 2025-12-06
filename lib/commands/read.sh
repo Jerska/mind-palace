@@ -35,6 +35,18 @@ cmd_read() {
     return 1
   fi
 
+  # Handle directories: try index.md
+  if [[ -d "$target" ]]; then
+    if [[ -f "$target/index.md" ]]; then
+      echo "Warning: $path is a directory, reading index.md" >&2
+      cat "$target/index.md"
+      return 0
+    else
+      echo "Error: $path is a directory with no index.md" >&2
+      return 1
+    fi
+  fi
+
   # Check it's a file
   if [[ ! -f "$target" ]]; then
     echo "Error: $path is not a file" >&2
