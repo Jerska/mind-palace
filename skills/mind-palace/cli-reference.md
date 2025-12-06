@@ -8,7 +8,8 @@ IMPORTANT: `~/.mind-palace/mp` is a CLI tool. Run it with Bash, do NOT use the R
 
 ```bash
 ~/.mind-palace/mp search <query>      # Search memories
-~/.mind-palace/mp list [type]         # List all memories (or filter by type)
+~/.mind-palace/mp list                # List memories (excludes sessions)
+~/.mind-palace/mp list [type]         # List specific type (user|project|self|session)
 ~/.mind-palace/mp read <path>         # Read file contents
 ~/.mind-palace/mp add <type> <name>   # Create memory (types: user|project|self|session)
 ~/.mind-palace/mp write <path> <text> # Write text to file

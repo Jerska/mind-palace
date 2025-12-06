@@ -11,7 +11,8 @@ Use this skill to interact with your persistent memory system.
 
 ```bash
 ~/.mind-palace/mp search "query"
-~/.mind-palace/mp list [type]
+~/.mind-palace/mp list            # List all (excludes sessions)
+~/.mind-palace/mp list sessions   # List sessions
 ```
 
 ## Read/Write Memory

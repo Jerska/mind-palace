@@ -10,7 +10,8 @@ IMPORTANT: Use ONLY mp commands via Bash. Do NOT use Read, Edit, Write, Glob, or
 ## Commands
 
 ~/.mind-palace/mp search <query>      # Search memories
-~/.mind-palace/mp list [type]         # List memories
+~/.mind-palace/mp list                # List memories (excludes sessions)
+~/.mind-palace/mp list [type]         # List specific type (user|project|self|session)
 ~/.mind-palace/mp read <path>         # Read file
 ~/.mind-palace/mp write <path> <text> # Write file
 ~/.mind-palace/mp add <type> <name>   # Create memory (user|project|self|session)

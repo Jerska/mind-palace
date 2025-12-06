@@ -31,7 +31,7 @@ Usage: $MP_CMD <command> [args]
 
 Commands:
   search <query>       Search memories
-  list [type]          List all memories (or filter by type)
+  list [type]          List memories (excludes sessions by default)
   read <path>          Read file contents
   add <type> <name>    Create new memory (type: user|project|self|session)
   write <path> <text>  Write text to file
