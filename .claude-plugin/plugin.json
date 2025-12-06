@@ -1,0 +1,13 @@
+{
+  "name": "mind-palace",
+  "version": "0.1.0",
+  "description": "Memory system for Claude Code addressing context window limitations",
+  "author": {
+    "name": "jerska",
+    "url": "https://github.com/jerska"
+  },
+  "repository": "https://github.com/jerska/mind-palace",
+  "license": "MIT",
+  "keywords": ["memory", "context", "persistence"],
+  "hooks": "./hooks/hooks.json"
+}
